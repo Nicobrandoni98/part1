@@ -76,9 +76,9 @@ const App = () => {
       <Statistics statics={statics}/>
     </div>
   );
-};
+}; */
 
-export default App; */
+/* export default App; */
 
 // 3RA PARTE DE LOS EJERCICIOS
 
@@ -96,8 +96,9 @@ const App = () => {
     'The only way to go fast, is to go well.'
   ]
 
-  const [selected, setSelected] = useState(0)
-  
+  const [lastRandomAnecdote, setAnecdote] = useState(0)
+
+
   const [voto, setVoto] = useState({
     0: 0,
     1: 0,
@@ -111,21 +112,26 @@ const App = () => {
   
    const anecdotasRandom = () => {
     const random = (Math.floor(anecdotes.length * Math.random()));
-    setSelected(random);
+    setAnecdote(random);
+    console.log(typeof random);
+  }  
+
+  const vote = () => {
+    const getVotes = {
+    ...voto,
+    [lastRandomAnecdote]: parseInt(voto[lastRandomAnecdote]) + 1,
+  } 
+  setVoto(getVotes)
+  console.log(lastRandomAnecdote);
+  console.log(voto[lastRandomAnecdote]);
   }  
   
-  const votar = () => {
-    const votando = {
-    }
-  }
-
-
   return (
     <div>
-      <p>{anecdotes[selected]}</p>
-      <p>Tiene {} votos.</p>
+      <p>{anecdotes[lastRandomAnecdote]}</p>
+      <p>Tiene {voto[lastRandomAnecdote]} votos.</p>
       <button onClick={anecdotasRandom}>Siguiente anectoda</button>
-      <button onClick={votar}>
+      <button onClick={vote}>
         Votar
       </button>
     </div>
